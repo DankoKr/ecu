@@ -20,7 +20,7 @@ function NavBar() {
               <NavLink
                 key={route.path}
                 to={route.path}
-                className="text-white hover:text-slate-400"
+                className="text-white hover:underline"
               >
                 {route.name}
               </NavLink>
