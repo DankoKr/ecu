@@ -7,9 +7,9 @@ function NavBar() {
   ];
 
   return (
-    <nav className="flex items-center border-b border-gray-200 py-5 px-10 m-auto">
+    <nav className="flex items-center justify-between border-b border-gray-200 py-4 px-6 md:px-10">
       <h1 className="text-red-300 font-bold">ECU Intranet</h1>
-      <div className="ml-auto flex space-x-4 font-bold">
+      <div className="flex space-x-4 font-bold">
         {nav.map((route) => {
           if (route.isVisible) {
             return (

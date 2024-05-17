@@ -1,5 +1,11 @@
+import MainLayout from "../layouts/MainLayout";
+
 function HomePage() {
-  return <h1>Homepage hiiii</h1>;
+  return (
+    <MainLayout>
+      <h1>Homepage hiiii</h1>
+    </MainLayout>
+  );
 }
 
 export default HomePage;
