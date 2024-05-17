@@ -11,7 +11,7 @@ function HomePage() {
           className="rounded-lg shadow-lg w-full max-w-4xl h-auto"
         />
         <div className="mt-8 max-w-2xl text-center px-4">
-          <h1 className="text-3xl font-bold mb-4">Welcome to ECU Intranet</h1>
+          <h1 className="text-3xl font-bold mb-4">Welcome team Bulgaria!</h1>
           <p className="text-lg text-gray-700">
             Our platform provides a comprehensive solution to manage your
             projects efficiently. With a range of features designed to

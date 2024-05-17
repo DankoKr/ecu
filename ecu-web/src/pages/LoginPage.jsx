@@ -1,7 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import background from "../assets/background.webp";
 import logo from "../assets/logo.png";
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const onSubmit = () => {
+    navigate("/");
+  };
+
   return (
     <div
       className="min-h-screen bg-cover bg-center flex items-center justify-center"
@@ -48,6 +54,7 @@ function LoginPage() {
               <button
                 className="bg-[#207daf] hover:bg-blue-900 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
                 type="button"
+                onClick={onSubmit}
               >
                 Sign In
               </button>
