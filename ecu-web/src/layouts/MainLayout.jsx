@@ -6,9 +6,9 @@ function MainLayout({ children }) {
   return (
     <div className="flex flex-col min-h-screen">
       <NavBar />
-      <div className="flex-1 flex flex-col lg:ml-72">
-        <div className="flex-1 w-full mt-5 grid grid-cols-1 lg:grid-cols-[3.5fr,1.5fr]">
-          {children}
+      <div className="flex-1 flex flex-col items-center justify-center px-4">
+        <div className="flex-1 flex items-center justify-center w-full mt-5">
+          <div className="w-full max-w-7xl">{children}</div>
         </div>
       </div>
       <Footer />
