@@ -5,7 +5,7 @@ const { createToken, verifyExpiration } = db.authToken;
 
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
     // Check if the email exists
     const userExists = await db.User.findOne({
       where: { email },
@@ -18,6 +18,7 @@ const registerUser = async (req, res) => {
 
     await db.User.create({
       name,
+      role,
       email,
       password: await bcrypt.hash(password, 15),
     });
@@ -44,15 +45,20 @@ const signInUser = async (req, res) => {
     }
 
     // Authenticate user with jwt
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_REFRESH_EXPIRATION,
-    });
+    const token = jwt.sign(
+      { id: user.id, userRole: user.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: process.env.JWT_REFRESH_EXPIRATION,
+      }
+    );
 
     let refreshToken = await createToken(user);
 
     res.status(200).send({
       id: user.id,
       name: user.name,
+      role: user.role,
       email: user.email,
       accessToken: token,
       refreshToken,
@@ -91,9 +97,13 @@ const refreshToken = async (req, res) => {
         exclude: ["password"],
       },
     });
-    let newAccessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_REFRESH_EXPIRATION,
-    });
+    let newAccessToken = jwt.sign(
+      { id: user.id, userRole: user.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: process.env.JWT_REFRESH_EXPIRATION,
+      }
+    );
 
     return res.status(200).json({
       accessToken: newAccessToken,

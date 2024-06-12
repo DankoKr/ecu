@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   authToken.init(
     {
       user: DataTypes.INTEGER,
+      userRole: DataTypes.STRING,
       token: DataTypes.STRING,
       expiryDate: DataTypes.DATE,
     },
@@ -35,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     let refreshToken = await authToken.create({
       token: _token,
       user: user.id,
+      userRole: user.role,
       expiryDate: expiredAt,
     });
     return refreshToken.token;
