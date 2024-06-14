@@ -1,6 +1,10 @@
 const express = require("express");
 const multer = require("multer");
-const { uploadFile, getFileById } = require("../controllers/file.controller");
+const {
+  uploadFile,
+  getFileById,
+  getFilesBySector,
+} = require("../controllers/file.controller");
 const { verifyToken } = require("../middlewares/auth.middleware");
 const { adminAuth } = require("../middlewares/adminAuth.middleware");
 
@@ -18,5 +22,8 @@ router.post(
 
 // Route to get file by id
 router.get("/files/:id", verifyToken, getFileById);
+
+// Route to get all files for a given sector
+router.get("/files/sector/:sectorName", verifyToken, getFilesBySector);
 
 module.exports = router;

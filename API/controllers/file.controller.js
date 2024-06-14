@@ -30,7 +30,22 @@ const getFileById = async (req, res) => {
   }
 };
 
+const getFilesBySector = async (req, res) => {
+  const sectorName = req.params.sectorName;
+  try {
+    const files = await db.File.findAll({
+      where: { sector: sectorName },
+      attributes: ["id", "name", "mimeType"],
+    });
+
+    res.json(files);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to retrieve files" });
+  }
+};
+
 module.exports = {
   uploadFile,
   getFileById,
+  getFilesBySector,
 };
