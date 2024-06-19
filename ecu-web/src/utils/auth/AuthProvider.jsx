@@ -9,23 +9,26 @@ export default function AuthProvider({ children }) {
     !!localStorage.getItem("accessToken")
   );
 
+  const [user, setUser] = useState(null);
+
   const navigate = useNavigate();
 
   const login = async (credentials) => {
-    const data = await signInUser(credentials);
+    const response = await signInUser(credentials);
+    setUser({ id: response.id, name: response.name, role: response.role });
     setIsAuthenticated(true);
-    return data;
+    navigate("/");
   };
 
   const logout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     setIsAuthenticated(false);
-    navigate("/");
+    navigate("/login");
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, user }}>
       {children}
     </AuthContext.Provider>
   );

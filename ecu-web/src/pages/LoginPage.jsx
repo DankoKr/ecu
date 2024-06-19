@@ -1,19 +1,16 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import background from "../assets/background.webp";
 import logo from "../assets/logo.png";
-import { signInUser } from "../utils/requests/signInUser.request";
+import AuthContext from "../utils/auth/AuthContext";
 
 function LoginPage() {
-  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onSubmit = async () => {
     try {
-      const response = await signInUser({ email, password });
-      console.log("Signed in successfully:", response);
-      navigate("/");
+      await login({ email, password });
     } catch (error) {
       console.error("Sign-In error:", error);
     }
