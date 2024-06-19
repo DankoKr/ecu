@@ -24,7 +24,7 @@ const getFileById = async (req, res) => {
     }
     res.setHeader("Content-Type", file.mimeType);
     res.send(file.data); // To send file text content
-    // res.send(file.data); // To send file binary
+    // res.send(file); // To send file binary
   } catch (error) {
     res.status(500).json({ error: "Failed to retrieve file" });
   }
