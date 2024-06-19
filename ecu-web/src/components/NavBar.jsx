@@ -20,7 +20,9 @@ function NavBar() {
 
   return (
     <nav className="flex items-center sticky top-0 justify-between bg-blue-800 border-b border-gray-200 py-4 px-6 md:px-10">
-      <h1 className="text-white font-bold">ECU Intranet</h1>
+      <h1 className="text-white font-bold">
+        <NavLink to="/">ECU Intranet</NavLink>
+      </h1>
       <div className="flex items-center space-x-4 font-bold">
         <div className="md:hidden">
           <button onClick={toggleMobileMenu} className="focus:outline-none">
