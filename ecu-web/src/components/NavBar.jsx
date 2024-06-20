@@ -7,11 +7,19 @@ function NavBar() {
 
   const nav = [
     { path: "/", name: "Home", isVisible: true },
-    { path: "/login", name: "General Assembly Documents", isVisible: true },
-    { path: "/login", name: "Meeting Minutes", isVisible: true },
-    { path: "/login", name: "NF Information", isVisible: true },
-    { path: "/login", name: "Judges Information", isVisible: true },
-    { path: "/login", name: "ECU Development Fund", isVisible: true },
+    {
+      path: "/general-assembly",
+      name: "General Assembly Documents",
+      isVisible: true,
+    },
+    { path: "/meeting-min", name: "Meeting Minutes", isVisible: true },
+    { path: "/nf-info", name: "NF Information", isVisible: true },
+    { path: "/judges-info", name: "Judges Information", isVisible: true },
+    {
+      path: "/development-fund",
+      name: "ECU Development Fund",
+      isVisible: true,
+    },
   ];
 
   const toggleMobileMenu = () => {

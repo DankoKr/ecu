@@ -12,7 +12,7 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
-      config.headers["Authorization"] = `Bearer ${accessToken}`;
+      config.headers["Authorization"] = `${accessToken}`;
     }
     return config;
   },
@@ -38,7 +38,7 @@ axiosInstance.interceptors.response.use(
         try {
           // Request new access token using the refresh token
           const { data } = await axiosInstance.post("/refresh-token", {
-            token: refreshToken,
+            refreshToken: refreshToken,
           });
 
           // Update tokens in localStorage
@@ -48,10 +48,8 @@ axiosInstance.interceptors.response.use(
           // Update authorization header for the original request
           axiosInstance.defaults.headers.common[
             "Authorization"
-          ] = `Bearer ${data.accessToken}`;
-          originalRequest.headers[
-            "Authorization"
-          ] = `Bearer ${data.accessToken}`;
+          ] = `${data.accessToken}`;
+          originalRequest.headers["Authorization"] = `${data.accessToken}`;
 
           // Retry the original request with the new access token
           return axiosInstance(originalRequest);
@@ -60,7 +58,7 @@ axiosInstance.interceptors.response.use(
           console.error("Refresh token expired or invalid", err);
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
-          window.location.href = "/login"; // Redirect to login
+          window.location.href = "/login";
           return Promise.reject(err);
         }
       }

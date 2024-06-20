@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProtectedRoute from "./utils/auth/ProtectedRoute";
+import ECUDevelopmentFund from "./pages/ECUDevelopmentFund";
+import DocumentView from "./components/DocumentView";
 
 function App() {
   return (
@@ -14,6 +16,27 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/" element={<HomePage />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route
+                path="/development-fund"
+                element={<ECUDevelopmentFund />}
+              />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/documents/:fileId" element={<DocumentView />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/general-assembly" element={<HomePage />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/judges-info" element={<HomePage />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/meeting-min" element={<HomePage />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/nf-info" element={<HomePage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
