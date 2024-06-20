@@ -6,7 +6,6 @@ function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const nav = [
-    { path: "/", name: "Home", isVisible: true },
     {
       path: "/general-assembly",
       name: "General Assembly Documents",

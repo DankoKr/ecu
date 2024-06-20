@@ -5,7 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProtectedRoute from "./utils/auth/ProtectedRoute";
 import ECUDevelopmentFund from "./pages/ECUDevelopmentFund";
-import DocumentView from "./components/DocumentView";
+import GeneralAssemblyDocumentsPage from "./pages/GeneralAssemblyDocumentsPage";
 
 function App() {
   return (
@@ -24,10 +24,10 @@ function App() {
               />
             </Route>
             <Route element={<ProtectedRoute />}>
-              <Route path="/documents/:fileId" element={<DocumentView />} />
-            </Route>
-            <Route element={<ProtectedRoute />}>
-              <Route path="/general-assembly" element={<HomePage />} />
+              <Route
+                path="/general-assembly"
+                element={<GeneralAssemblyDocumentsPage />}
+              />
             </Route>
             <Route element={<ProtectedRoute />}>
               <Route path="/judges-info" element={<HomePage />} />

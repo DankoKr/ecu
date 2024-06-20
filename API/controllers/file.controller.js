@@ -23,7 +23,7 @@ const getFileById = async (req, res) => {
       return res.status(404).json({ error: "File not found" });
     }
     res.setHeader("Content-Type", file.mimeType);
-    res.send(file);
+    res.send(file.data);
   } catch (error) {
     res.status(500).json({ error: "Failed to retrieve file" });
   }
