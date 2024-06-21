@@ -6,6 +6,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProtectedRoute from "./utils/auth/ProtectedRoute";
 import ECUDevelopmentFund from "./pages/ECUDevelopmentFund";
 import GeneralAssemblyDocumentsPage from "./pages/GeneralAssemblyDocumentsPage";
+import FileFormPage from "./components/FileFormPage";
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
             </Route>
             <Route element={<ProtectedRoute />}>
               <Route path="/nf-info" element={<HomePage />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/upload-form" element={<FileFormPage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

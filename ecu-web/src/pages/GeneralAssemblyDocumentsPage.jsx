@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { getDocsBySector } from "../utils/requests/getDocsBySector.request";
 import { getDocById } from "../utils/requests/getDocById.request";
+import NoDocumentsView from "../components/NoDocumentsView";
 
 function GeneralAssemblyDocumentsPage() {
   const [docs, setDocs] = useState([]);
@@ -42,7 +43,7 @@ function GeneralAssemblyDocumentsPage() {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  if (docs.length === 0) return <div>There are no docs for this sector...</div>;
+  if (docs.length === 0) return <NoDocumentsView />;
 
   return (
     <MainLayout>

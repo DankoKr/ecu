@@ -9,7 +9,7 @@ export default function AuthProvider({ children }) {
     !!localStorage.getItem("accessToken")
   );
 
-  const [user, setUser] = useState(JSON.parse(!!localStorage.getItem("user")));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const navigate = useNavigate();
 

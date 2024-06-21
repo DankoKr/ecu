@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { getDocsBySector } from "../utils/requests/getDocsBySector.request";
 import { getDocById } from "../utils/requests/getDocById.request";
+import NoDocumentsView from "../components/NoDocumentsView";
 
 function ECUDevelopmentFund() {
   const [docs, setDocs] = useState([]);
@@ -11,7 +12,7 @@ function ECUDevelopmentFund() {
   useEffect(() => {
     const fetchDocs = async () => {
       try {
-        const docsData = await getDocsBySector("NF Information");
+        const docsData = await getDocsBySector("ECU Development Fund");
         setDocs(docsData);
         setLoading(false);
       } catch (err) {
@@ -42,12 +43,12 @@ function ECUDevelopmentFund() {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  if (docs.length === 0) return <div>There are no docs for this sector...</div>;
+  if (docs.length === 0) return <NoDocumentsView />;
 
   return (
     <MainLayout>
       <div className="max-w-[800px] mx-auto p-5 bg-[#f8f9fa] rounded-md shadow-md">
-        <h2 className="mb-5 text-xl font-bold text-blue-800">
+        <h2 className="mb-5 text-2xl font-bold text-blue-800">
           ECU Development Fund
         </h2>
         <ul className="list-disc pl-5 space-y-2">
@@ -55,7 +56,7 @@ function ECUDevelopmentFund() {
             <li
               key={doc.id}
               onClick={() => handleDownload(doc.id, doc.name)}
-              className="cursor-pointer hover:underline"
+              className="cursor-pointer hover:underline text-xl"
             >
               <span>{doc.name}</span>
             </li>
