@@ -6,7 +6,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProtectedRoute from "./utils/auth/ProtectedRoute";
 import ECUDevelopmentFund from "./pages/ECUDevelopmentFund";
 import GeneralAssemblyDocumentsPage from "./pages/GeneralAssemblyDocumentsPage";
-import FileFormPage from "./components/FileFormPage";
+import FileFormPage from "./pages/FileFormPage";
 
 function App() {
   return (
