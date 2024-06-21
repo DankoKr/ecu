@@ -22,16 +22,21 @@ function GeneralAssemblyDocumentsPage() {
     };
 
     fetchDocs();
-  }, []);
+  }, [docs]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  if (docs.length === 0) return <NoDocumentsView />;
+  if (docs.length === 0)
+    return (
+      <MainLayout>
+        <NoDocumentsView />
+      </MainLayout>
+    );
 
   return (
     <MainLayout>
       <div className="max-w-[800px] mx-auto p-5 bg-[#f8f9fa] rounded-md shadow-md">
-        <DocumentList title={"General Assembly Documents"} docs={docs} />
+        <DocumentList title={"General Assembly Documents"} initialDocs={docs} />
       </div>
     </MainLayout>
   );

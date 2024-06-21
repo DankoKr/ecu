@@ -4,6 +4,7 @@ const {
   uploadFile,
   getFileById,
   getFilesBySector,
+  deleteFileById,
 } = require("../controllers/file.controller");
 const { verifyToken } = require("../middlewares/auth.middleware");
 const { adminAuth } = require("../middlewares/adminAuth.middleware");
@@ -25,5 +26,8 @@ router.get("/files/:id", verifyToken, getFileById);
 
 // Route to get all files for a given sector
 router.get("/files/sector/:sectorName", verifyToken, getFilesBySector);
+
+// Route to delete file by id
+router.delete("/files/:id", verifyToken, adminAuth, deleteFileById);
 
 module.exports = router;

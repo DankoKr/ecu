@@ -43,8 +43,23 @@ const getFilesBySector = async (req, res) => {
   }
 };
 
+const deleteFileById = async (req, res) => {
+  try {
+    const file = await db.File.findByPk(req.params.id);
+    if (!file) {
+      return res.status(404).json({ error: "File not found" });
+    }
+
+    await file.destroy();
+    res.status(200).json({ message: "File deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete file" });
+  }
+};
+
 module.exports = {
   uploadFile,
   getFileById,
   getFilesBySector,
+  deleteFileById,
 };
