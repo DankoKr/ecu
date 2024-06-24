@@ -12,8 +12,10 @@ export const signInUser = async (credentials) => {
         id: response.data.id,
         name: response.data.name,
         role: response.data.role,
+        image: response.data.image,
       })
     );
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Sign-In error:", error);

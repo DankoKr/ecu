@@ -4,6 +4,11 @@ const uploadFile = async (req, res) => {
   try {
     const { originalname, mimetype, buffer } = req.file;
     const { sector } = req.body;
+
+    if (!originalname || !mimetype || !buffer || !sector) {
+      return res.status(400).send("All fields are required");
+    }
+
     const file = await db.File.create({
       name: originalname,
       mimeType: mimetype,

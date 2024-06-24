@@ -6,6 +6,12 @@ const { createToken, verifyExpiration } = db.authToken;
 const registerUser = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
+    const image = req.file;
+
+    // Validate required fields
+    if (!name || !email || !password || !role || !image) {
+      return res.status(400).send("All fields are required");
+    }
 
     // Check if the email exists
     const userExists = await db.User.findOne({
@@ -18,14 +24,21 @@ const registerUser = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Convert image file to Buffer
+    const imageBuffer = Buffer.from(image.buffer);
+
     await db.User.create({
       name,
       role,
       email,
       password: hashedPassword,
+      image: imageBuffer, // Store image as Buffer (BLOB)
     });
-    return res.status(200).send("Registration successful");
+
+    return res.status(201).send("Registration successful");
   } catch (err) {
+    console.error(err);
     return res.status(500).send("Error in registering user");
   }
 };
@@ -36,6 +49,7 @@ const signInUser = async (req, res) => {
     const user = await db.User.findOne({
       where: { email },
     });
+
     if (!user) {
       return res.status(404).json("Email not found");
     }
@@ -44,6 +58,13 @@ const signInUser = async (req, res) => {
     const passwordValid = await bcrypt.compare(password, user.password);
     if (!passwordValid) {
       return res.status(401).json("Incorrect email and password combination");
+    }
+
+    let imageBase64 = null;
+    if (user.image) {
+      // Convert hex string to Buffer and then to Base64
+      const imageBuffer = Buffer.from(user.image.toString("hex"), "hex");
+      imageBase64 = imageBuffer.toString("base64");
     }
 
     // Authenticate user with jwt
@@ -62,11 +83,12 @@ const signInUser = async (req, res) => {
       name: user.name,
       role: user.role,
       email: user.email,
+      image: imageBase64,
       accessToken,
       refreshToken,
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return res.status(500).send("Sign in error");
   }
 };
