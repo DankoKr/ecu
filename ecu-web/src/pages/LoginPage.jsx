@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import background from "../assets/background.webp";
 import logo from "../assets/logo.png";
 import AuthContext from "../utils/auth/AuthContext";
+import backgroundVideo from "../assets/intro.mp4";
 
 function LoginPage() {
   const { login } = useContext(AuthContext);
@@ -25,11 +25,17 @@ function LoginPage() {
   };
 
   return (
-    <div
-      className="min-h-screen bg-cover bg-center flex items-center justify-center"
-      style={{ backgroundImage: `url(${background})` }}
-    >
-      <div className="bg-white bg-opacity-75 p-8 rounded-lg shadow-lg w-full max-w-md flex">
+    <div className="min-h-screen bg-black flex items-center justify-center relative">
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        src={backgroundVideo}
+      />
+
+      <div className="bg-white bg-opacity-75 p-8 rounded-lg shadow-lg w-full max-w-md flex relative z-10">
         <div className="w-1/3 flex items-center justify-center">
           <img src={logo} className="h-auto max-h-full" alt="Left Image" />
         </div>

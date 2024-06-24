@@ -15,7 +15,6 @@ export const signInUser = async (credentials) => {
         image: response.data.image,
       })
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Sign-In error:", error);
