@@ -7,16 +7,19 @@ function NavBar() {
 
   const nav = [
     {
-      path: "/general-assembly",
+      path: "/general-assembly-documents",
       name: "General Assembly Documents",
       isVisible: true,
     },
-    { path: "/meeting-min", name: "Meeting Minutes", isVisible: true },
-    { path: "/nf-info", name: "NF Information", isVisible: true },
-    { path: "/judges-info", name: "Judges Information", isVisible: true },
     {
-      path: "/development-fund",
-      name: "ECU Development Fund",
+      path: "/board-meeting-minutes",
+      name: "Board Meeting Minutes",
+      isVisible: true,
+    },
+    { path: "/ecl", name: "ECL", isVisible: true },
+    {
+      path: "/congress-documents",
+      name: "Congress Documents",
       isVisible: true,
     },
   ];

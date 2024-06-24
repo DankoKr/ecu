@@ -4,7 +4,7 @@ import { getDocsBySector } from "../utils/requests/getDocsBySector.request";
 import NoDocumentsView from "../components/NoDocumentsView";
 import DocumentList from "../components/DocumentList";
 
-function ECUDevelopmentFund() {
+function CongressDocumentsPage() {
   const [docs, setDocs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,7 +12,7 @@ function ECUDevelopmentFund() {
   useEffect(() => {
     const fetchDocs = async () => {
       try {
-        const docsData = await getDocsBySector("ECU Development Fund");
+        const docsData = await getDocsBySector("Congress Documents");
         setDocs(docsData);
         setLoading(false);
       } catch (err) {
@@ -42,4 +42,4 @@ function ECUDevelopmentFund() {
   );
 }
 
-export default ECUDevelopmentFund;
+export default CongressDocumentsPage;

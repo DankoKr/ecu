@@ -10,17 +10,16 @@ function HomePage() {
           <img
             src={`data:image/jpg;base64,${user.image}`}
             alt="User Image"
-            style={{ maxWidth: "100%", height: "auto" }}
+            className="w-auto h-auto"
           />
         )}
         <div className="mt-8 max-w-2xl text-center px-4">
           <h1 className="text-3xl font-bold mb-4">Welcome team {user.name}!</h1>
           <p className="text-lg text-gray-700">
-            Our platform provides a comprehensive solution to manage your
-            projects efficiently. With a range of features designed to
-            streamline your workflow, we aim to help you achieve your goals
-            faster and more effectively. Join us and experience the difference!
+            Here is your national federation area with all important documents
+            and materials from European Cheer Union structures.
           </p>
+          <p className="text-lg text-gray-700">- ECU Executive Board -</p>
         </div>
       </div>
     </MainLayout>
