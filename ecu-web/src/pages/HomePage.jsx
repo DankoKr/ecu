@@ -10,7 +10,7 @@ function HomePage() {
           <img
             src={`data:image/jpg;base64,${user.image}`}
             alt="User Image"
-            className="w-auto h-auto"
+            className="rounded-lg shadow-lg w-full max-w-4xl h-auto"
           />
         )}
         <div className="mt-8 max-w-2xl text-center px-4">

@@ -36,7 +36,7 @@ function ECLPage() {
   return (
     <MainLayout>
       <div className="max-w-[800px] mx-auto p-5 bg-[#f8f9fa] rounded-md shadow-md">
-        <DocumentList title={"ECU Development Fund"} initialDocs={docs} />
+        <DocumentList title={"ECL Documents"} initialDocs={docs} />
       </div>
     </MainLayout>
   );

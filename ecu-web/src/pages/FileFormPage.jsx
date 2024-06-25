@@ -57,10 +57,14 @@ export default function FileFormPage() {
             className="w-full p-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select Sector</option>
+            <option value="Board Meeting Minutes">Board Meeting Minutes</option>
+            <option value="Congress Documents">Congress Documents</option>
             <option value="ECU Development Fund">Development Fund</option>
-            <option value="General Assembly Documents">General Assembly</option>
+            <option value="ECL">ECL</option>
+            <option value="General Assembly Documents">
+              General Assembly Documents
+            </option>
             <option value="Judges Information">Judges Information</option>
-            <option value="Meeting Minutes">Meeting Minutes</option>
             <option value="NF Information">NF Information</option>
           </select>
           <button
