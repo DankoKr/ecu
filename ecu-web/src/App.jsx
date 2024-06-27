@@ -9,6 +9,7 @@ import GeneralAssemblyDocumentsPage from "./pages/GeneralAssemblyDocumentsPage";
 import FileFormPage from "./pages/FileFormPage";
 import BoardMeetingMinutesPage from "./pages/BoardMeetingMinutesPage";
 import CongressDocumentsPage from "./pages/CongressDocumentsPage";
+import UserFormPage from "./pages/UserFormPage";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/" element={<HomePage />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/create-user" element={<UserFormPage />} />
             </Route>
             <Route element={<ProtectedRoute />}>
               <Route path="/ecl" element={<ECLPage />} />

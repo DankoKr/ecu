@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { uploadFile } from "../utils/requests/uploadFile.request";
+import { postData } from "../utils/requests/postData.request";
 import MainLayout from "../layouts/MainLayout";
 
 export default function FileFormPage() {
@@ -31,7 +31,7 @@ export default function FileFormPage() {
     setError(null);
 
     try {
-      await uploadFile(formData);
+      await postData("/upload", formData);
       setFile(null);
       setSector("");
       setSuccessMessage("File uploaded successfully!");
