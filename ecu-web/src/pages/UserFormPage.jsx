@@ -41,7 +41,7 @@ function UserFormPage() {
       await postData("/sign-up", formData);
       setSuccessMessage("Member Registered successfully");
     } catch (error) {
-      setError("Email already exists");
+      setError("Email already used");
     }
   };
 
@@ -118,17 +118,17 @@ function UserFormPage() {
               className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
             />
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center flex-col">
+            {error && <p className="mb-2 text-red-500">{error}</p>}
+            {successMessage && (
+              <p className="mb-2 text-green-500">{successMessage}</p>
+            )}
             <button
               type="submit"
               className="bg-[#207daf] hover:bg-blue-900 text-white px-4 py-2 rounded-md shadow focus:outline-none focus:ring focus:ring-blue-300"
             >
               Register
             </button>
-            {error && <p className="mt-2 text-red-500">{error}</p>}
-            {successMessage && (
-              <p className="mt-2 text-green-500">{successMessage}</p>
-            )}
           </div>
         </form>
       </div>
