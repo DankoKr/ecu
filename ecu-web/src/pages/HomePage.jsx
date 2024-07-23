@@ -1,7 +1,10 @@
 import MainLayout from "../layouts/MainLayout";
+import AdminPage from "./AdminPage";
 
 function HomePage() {
   const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user.role === "ADMIN") return <AdminPage />;
 
   return (
     <MainLayout>

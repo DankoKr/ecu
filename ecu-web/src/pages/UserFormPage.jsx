@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { postData } from "../utils/requests/postData.request";
+import AccessDeniedPage from "./AccessDeniedPage";
+import AuthContext from "../utils/auth/AuthContext";
 
 function UserFormPage() {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
-  const [user, setUser] = useState({
+  const [newUser, setNewUser] = useState({
     name: "",
     email: "",
     role: "MEMBER",
@@ -13,17 +15,21 @@ function UserFormPage() {
     image: null,
   });
 
+  const { user } = useContext(AuthContext);
+
+  if (user.role != "ADMIN") return <AccessDeniedPage />;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser({
-      ...user,
+    setNewUser({
+      ...newUser,
       [name]: value,
     });
   };
 
   const handleImageChange = (e) => {
-    setUser({
-      ...user,
+    setNewUser({
+      ...newUser,
       image: e.target.files[0],
     });
   };
@@ -31,11 +37,11 @@ function UserFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("name", user.name);
-    formData.append("email", user.email);
-    formData.append("role", user.role);
-    formData.append("password", user.password);
-    formData.append("image", user.image);
+    formData.append("name", newUser.name);
+    formData.append("email", newUser.email);
+    formData.append("role", newUser.role);
+    formData.append("password", newUser.password);
+    formData.append("image", newUser.image);
 
     try {
       await postData("/sign-up", formData);
@@ -65,7 +71,7 @@ function UserFormPage() {
             <input
               type="text"
               name="name"
-              value={user.name}
+              value={newUser.name}
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
@@ -81,7 +87,7 @@ function UserFormPage() {
             <input
               type="email"
               name="email"
-              value={user.email}
+              value={newUser.email}
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
@@ -97,7 +103,7 @@ function UserFormPage() {
             <input
               type="password"
               name="password"
-              value={user.password}
+              value={newUser.password}
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"

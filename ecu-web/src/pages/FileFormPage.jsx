@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { postData } from "../utils/requests/postData.request";
 import MainLayout from "../layouts/MainLayout";
+import AuthContext from "../utils/auth/AuthContext";
+import AccessDeniedPage from "./AccessDeniedPage";
 
 export default function FileFormPage() {
   const [file, setFile] = useState(null);
@@ -8,6 +10,10 @@ export default function FileFormPage() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
+
+  const { user } = useContext(AuthContext);
+
+  if (user.role != "ADMIN") return <AccessDeniedPage />;
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
