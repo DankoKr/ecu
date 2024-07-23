@@ -5,11 +5,30 @@ const { createToken, verifyExpiration } = db.authToken;
 
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const {
+      name,
+      username,
+      email,
+      password,
+      role,
+      country,
+      federation,
+      website,
+    } = req.body;
     const image = req.file;
 
     // Validate required fields
-    if (!name || !email || !password || !role || !image) {
+    if (
+      !name ||
+      !email ||
+      !password ||
+      !role ||
+      !image ||
+      !username ||
+      !country ||
+      !federation ||
+      !website
+    ) {
       return res.status(400).send("All fields are required");
     }
 
@@ -30,7 +49,11 @@ const registerUser = async (req, res) => {
 
     await db.User.create({
       name,
+      username,
       role,
+      country,
+      federation,
+      website,
       email,
       password: hashedPassword,
       image: imageBuffer, // Store image as Buffer (BLOB)
@@ -81,6 +104,9 @@ const signInUser = async (req, res) => {
     res.status(200).send({
       id: user.id,
       name: user.name,
+      username: user.username,
+      country: user.country,
+      federation: user.federation,
       role: user.role,
       email: user.email,
       image: imageBase64,
