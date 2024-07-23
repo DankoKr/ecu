@@ -13,6 +13,9 @@ export const signInUser = async (credentials) => {
         name: response.data.name,
         role: response.data.role,
         image: response.data.image,
+        federation: response.data.federation,
+        username: response.data.username,
+        country: response.data.country,
       })
     );
     return response.data;

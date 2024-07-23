@@ -17,22 +17,12 @@ function Footer() {
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0">
             <li>
               <a href="#" className="hover:underline me-4 md:me-6">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline me-4 md:me-6">
                 Privacy Policy
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline me-4 md:me-6">
-                Licensing
-              </a>
-            </li>
-            <li>
               <a href="#" className="hover:underline">
-                Contact
+                Contact Support
               </a>
             </li>
           </ul>

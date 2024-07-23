@@ -15,7 +15,14 @@ export default function AuthProvider({ children }) {
 
   const login = async (credentials) => {
     const response = await signInUser(credentials);
-    setUser({ id: response.id, name: response.name, role: response.role });
+    console.log(response);
+    setUser({
+      id: response.id,
+      name: response.name,
+      role: response.role,
+      username: response.username,
+      federation: response.federation,
+    });
     setIsAuthenticated(true);
     navigate("/");
   };
