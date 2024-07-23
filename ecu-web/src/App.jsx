@@ -4,12 +4,25 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProtectedRoute from "./utils/auth/ProtectedRoute";
-import ECLPage from "./pages/ECLPage";
-import GeneralAssemblyDocumentsPage from "./pages/GeneralAssemblyDocumentsPage";
 import FileFormPage from "./pages/FileFormPage";
-import BoardMeetingMinutesPage from "./pages/BoardMeetingMinutesPage";
-import CongressDocumentsPage from "./pages/CongressDocumentsPage";
 import UserFormPage from "./pages/UserFormPage";
+import GeneralDocumentsPage from "./pages/GeneralDocumentsPage";
+import { nav } from "./components/navLinks";
+
+function generateRoutes(nav) {
+  return nav.flatMap((section) =>
+    section.subPages
+      ? section.subPages.map((subPage) => (
+          <Route key={subPage.path} element={<ProtectedRoute />}>
+            <Route
+              path={subPage.path}
+              element={<GeneralDocumentsPage pageTitle={subPage.name} />}
+            />
+          </Route>
+        ))
+      : []
+  );
+}
 
 function App() {
   return (
@@ -25,29 +38,9 @@ function App() {
               <Route path="/create-user" element={<UserFormPage />} />
             </Route>
             <Route element={<ProtectedRoute />}>
-              <Route path="/ecl" element={<ECLPage />} />
-            </Route>
-            <Route element={<ProtectedRoute />}>
-              <Route
-                path="/general-assembly-documents"
-                element={<GeneralAssemblyDocumentsPage />}
-              />
-            </Route>
-            <Route element={<ProtectedRoute />}>
-              <Route
-                path="/congress-documents"
-                element={<CongressDocumentsPage />}
-              />
-            </Route>
-            <Route element={<ProtectedRoute />}>
-              <Route
-                path="/board-meeting-minutes"
-                element={<BoardMeetingMinutesPage />}
-              />
-            </Route>
-            <Route element={<ProtectedRoute />}>
               <Route path="/upload-form" element={<FileFormPage />} />
             </Route>
+            {generateRoutes(nav)}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </AuthProvider>
