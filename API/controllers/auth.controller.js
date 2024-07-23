@@ -34,12 +34,17 @@ const registerUser = async (req, res) => {
 
     // Check if the email exists
     const userExists = await db.User.findOne({
-      where: { email },
+      where: {
+        [db.Sequelize.Op.or]: [
+          { username: req.body.username },
+          { email: req.body.email },
+        ],
+      },
     });
     if (userExists) {
       return res
         .status(400)
-        .send("Email is already associated with an account");
+        .send("Username or Email is already associated with an account");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -68,19 +73,21 @@ const registerUser = async (req, res) => {
 
 const signInUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
     const user = await db.User.findOne({
-      where: { email },
+      where: { username },
     });
 
     if (!user) {
-      return res.status(404).json("Email not found");
+      return res.status(404).json("User not found");
     }
 
     // Verify password
     const passwordValid = await bcrypt.compare(password, user.password);
     if (!passwordValid) {
-      return res.status(401).json("Incorrect email and password combination");
+      return res
+        .status(401)
+        .json("Incorrect username and password combination");
     }
 
     let imageBase64 = null;

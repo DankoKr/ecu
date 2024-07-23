@@ -5,19 +5,27 @@ import backgroundVideo from "../assets/intro.mp4";
 
 function LoginPage() {
   const { login } = useContext(AuthContext);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmit = async () => {
+    if (!username || !password) {
+      setErrorMessage("Username and Password are required");
+      return;
+    }
+
     try {
-      await login({ email, password });
+      await login({ username, password });
+      setErrorMessage("");
     } catch (error) {
+      setErrorMessage("Invalid credentials!");
       console.error("Sign-In error:", error);
     }
   };
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    setUsername(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -47,16 +55,16 @@ function LoginPage() {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="email"
+                htmlFor="username"
               >
-                Email
+                Username
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
                 type="text"
                 placeholder="Email"
-                value={email}
+                value={username}
                 onChange={handleEmailChange}
               />
             </div>
@@ -76,6 +84,11 @@ function LoginPage() {
                 onChange={handlePasswordChange}
               />
             </div>
+            {errorMessage && (
+              <div className="mb-4 text-red-600 text-sm text-center">
+                {errorMessage}
+              </div>
+            )}
             <div className="flex justify-center">
               <button
                 className="bg-[#207daf] hover:bg-blue-900 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
