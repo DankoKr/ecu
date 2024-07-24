@@ -27,6 +27,7 @@ function UserManagementPage() {
       await deleteData(user.id, "/users");
       setUser(null); // Clear user details after deletion
       setFederation("");
+      setError("");
     } catch (err) {
       setError("Error deleting user.");
     }
@@ -35,7 +36,9 @@ function UserManagementPage() {
   return (
     <MainLayout>
       <div className="p-6">
-        <h1 className="text-2xl font-bold mb-4">Select a Member</h1>
+        <h1 className="text-2xl font-bold mb-4 text-blue-800">
+          Select a Member
+        </h1>
 
         <form onSubmit={handleSearch} className="mb-4">
           <div className="flex items-center">
@@ -60,7 +63,9 @@ function UserManagementPage() {
 
         {user && (
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-bold mb-4">User Details</h2>
+            <h2 className="text-xl font-bold mb-4 text-blue-800">
+              User Details
+            </h2>
             <p>
               <strong>Username:</strong> {user.username}
             </p>
