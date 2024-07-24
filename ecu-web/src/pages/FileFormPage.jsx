@@ -3,6 +3,7 @@ import { postData } from "../utils/requests/postData.request";
 import MainLayout from "../layouts/MainLayout";
 import AuthContext from "../utils/auth/AuthContext";
 import AccessDeniedPage from "./AccessDeniedPage";
+import { options } from "../components/comboBoxOptions";
 
 export default function FileFormPage() {
   const [file, setFile] = useState(null);
@@ -13,7 +14,7 @@ export default function FileFormPage() {
 
   const { user } = useContext(AuthContext);
 
-  if (user.role != "ADMIN") return <AccessDeniedPage />;
+  if (user.role !== "ADMIN") return <AccessDeniedPage />;
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -63,15 +64,11 @@ export default function FileFormPage() {
             className="w-full p-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select Sector</option>
-            <option value="Board Meeting Minutes">Board Meeting Minutes</option>
-            <option value="Congress Documents">Congress Documents</option>
-            <option value="ECU Development Fund">Development Fund</option>
-            <option value="ECL">ECL</option>
-            <option value="General Assembly Documents">
-              General Assembly Documents
-            </option>
-            <option value="Judges Information">Judges Information</option>
-            <option value="NF Information">NF Information</option>
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.text}
+              </option>
+            ))}
           </select>
           <button
             onClick={handleUpload}

@@ -4,7 +4,7 @@ export const nav = [
     isVisible: true,
     subPages: [
       { path: "/annual-general-meetings", name: "Annual General Meetings" },
-      { path: "/congresses", name: "Congresses" },
+      { path: "/dm-congresses", name: "D&M Congresses" },
       { path: "/executive-board", name: "Executive Board" },
       { path: "/ecl-steering-committee", name: "ECL Steering Committee" },
       {
@@ -24,7 +24,7 @@ export const nav = [
     isVisible: true,
     subPages: [
       { path: "/general-meetings", name: "General Meetings" },
-      { path: "/congresses", name: "Congresses" },
+      { path: "/events-congresses", name: "Events Congresses" },
       { path: "/competitions", name: "Competitions" },
       { path: "/judges-education", name: "Judges Education" },
       { path: "/coaches-education", name: "Coaches Education" },
@@ -46,7 +46,7 @@ export const nav = [
     name: "Judges",
     isVisible: true,
     subPages: [
-      { path: "/judges-documents", name: "Documents" },
+      { path: "/judges-documents", name: "Judges Documents" },
       { path: "/judges-register", name: "Judges Register" },
     ],
   },
@@ -54,7 +54,7 @@ export const nav = [
     name: "Coaches",
     isVisible: true,
     subPages: [
-      { path: "/coaches-documents", name: "Documents" },
+      { path: "/coaches-documents", name: "Coaches Documents" },
       { path: "/coaches-register", name: "Coaches Register" },
     ],
   },

@@ -17,7 +17,7 @@ function UserFormPage() {
 
   const { user } = useContext(AuthContext);
 
-  if (user.role != "ADMIN") return <AccessDeniedPage />;
+  if (user.role !== "ADMIN") return <AccessDeniedPage />;
 
   const handleChange = (e) => {
     const { name, value } = e.target;

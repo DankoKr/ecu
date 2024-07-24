@@ -16,7 +16,7 @@ function NavBar() {
   };
 
   return (
-    <nav className="flex items-center sticky top-0 justify-between bg-blue-800 border-b border-gray-200 py-4 px-6 md:px-10">
+    <nav className="flex items-center sticky top-0 justify-between bg-blue-800 border-b border-gray-200 py-4 px-6 md:px-10 z-50">
       <h1 className="text-white font-bold">
         <NavLink to="/">ECU Intranet</NavLink>
       </h1>
@@ -52,7 +52,7 @@ function NavBar() {
                     </svg>
                   </button>
                   {dropdownOpen === index && (
-                    <div className="absolute bg-blue-700 text-white mt-2 rounded shadow-lg w-48">
+                    <div className="absolute bg-blue-700 text-white mt-2 rounded shadow-lg w-48 z-50">
                       {route.subPages.map((subPage) => (
                         <NavLink
                           key={subPage.path}
@@ -81,7 +81,7 @@ function NavBar() {
         </div>
       </div>
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-blue-800">
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-blue-800 z-50">
           <div className="flex flex-col items-start space-y-2 px-4 py-2">
             {nav.map((route, index) => {
               if (route.isVisible) {
