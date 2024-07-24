@@ -1,26 +1,35 @@
+import { useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
+import { getData } from "../utils/requests/getData.request";
 
 function NationalFederationsPage() {
-  const federations = [
-    {
-      country: "USA",
-      federation: "USA National Federation",
-      email: "info@usafederation.org",
-      website: "https://www.usafederation.org",
-    },
-    {
-      country: "Canada",
-      federation: "Canada National Federation",
-      email: "info@canadafederation.ca",
-      website: "https://www.canadafederation.ca",
-    },
-    {
-      country: "Germany",
-      federation: "Germany National Federation",
-      email: "info@germanyfederation.de",
-      website: "https://www.germanyfederation.de",
-    },
-  ];
+  const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const docsData = await getData("/users");
+        setMembers(docsData);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
+
+    fetchMembers();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (members.length === 0)
+    return (
+      <MainLayout>
+        <h1>There are no members except Admin!</h1>
+      </MainLayout>
+    );
 
   return (
     <MainLayout>
@@ -43,25 +52,23 @@ function NationalFederationsPage() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {federations.map((federation, index) => (
+            {members.map((member, index) => (
               <tr key={index} className="hover:bg-gray-100">
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {federation.country}
+                  {member.country}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {federation.federation}
+                  {member.federation}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {federation.email}
-                </td>
+                <td className="px-6 py-4 whitespace-nowrap">{member.email}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <a
-                    href={federation.website}
+                    href={member.website}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-indigo-600 hover:text-indigo-900"
                   >
-                    {federation.website}
+                    {member.website}
                   </a>
                 </td>
               </tr>
