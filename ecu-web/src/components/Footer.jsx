@@ -21,7 +21,10 @@ function Footer() {
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <a
+                href="https://www.cheerunion.eu/contact_us/"
+                className="hover:underline"
+              >
                 Contact Support
               </a>
             </li>

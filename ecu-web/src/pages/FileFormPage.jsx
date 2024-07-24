@@ -54,7 +54,7 @@ export default function FileFormPage() {
     <MainLayout>
       <div className="flex items-center justify-center">
         <div className="max-w-lg w-full mx-auto p-6 bg-white rounded-lg shadow-md text-center">
-          <h2 className="text-4xl font-bold text-gray-800 mb-6">
+          <h2 className="text-4xl font-bold text-blue-800 mb-6">
             Upload a Document
           </h2>
           <input type="file" onChange={handleFileChange} className="mb-4" />

@@ -13,6 +13,10 @@ function UserFormPage() {
     role: "MEMBER",
     password: "",
     image: null,
+    country: "",
+    username: "",
+    federationname: "",
+    website: "",
   });
 
   const { user } = useContext(AuthContext);
@@ -42,6 +46,10 @@ function UserFormPage() {
     formData.append("role", newUser.role);
     formData.append("password", newUser.password);
     formData.append("image", newUser.image);
+    formData.append("country", newUser.country);
+    formData.append("username", newUser.username);
+    formData.append("federation", newUser.federation);
+    formData.append("website", newUser.website);
 
     try {
       await postData("/sign-up", formData);
@@ -56,75 +64,141 @@ function UserFormPage() {
       <div className="flex items-center justify-center">
         <form
           onSubmit={handleSubmit}
-          className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
+          className="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl"
         >
           <h2 className="text-2xl font-bold mb-6 text-center text-blue-800">
             Register Member
           </h2>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={newUser.name}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="username"
+              >
+                Username
+              </label>
+              <input
+                type="text"
+                name="username"
+                value={newUser.username}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="name"
+              >
+                Name President
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={newUser.name}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="email"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={newUser.email}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={newUser.password}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="image"
+              >
+                Profile Image
+              </label>
+              <input
+                type="file"
+                name="image"
+                onChange={handleImageChange}
+                required
+                className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="country"
+              >
+                Country
+              </label>
+              <input
+                type="text"
+                name="country"
+                value={newUser.country}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="federationname"
+              >
+                Federation Name
+              </label>
+              <input
+                type="text"
+                name="federation"
+                value={newUser.federation}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="website"
+              >
+                Website
+              </label>
+              <input
+                type="text"
+                name="website"
+                value={newUser.website}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+              />
+            </div>
           </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={newUser.email}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              value={newUser.password}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="image"
-            >
-              Profile Image
-            </label>
-            <input
-              type="file"
-              name="image"
-              onChange={handleImageChange}
-              required
-              className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-            />
-          </div>
-          <div className="flex items-center justify-center flex-col">
+          <div className="flex items-center justify-center flex-col mt-6">
             {error && <p className="mb-2 text-red-500">{error}</p>}
             {successMessage && (
               <p className="mb-2 text-green-500">{successMessage}</p>

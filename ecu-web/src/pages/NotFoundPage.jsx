@@ -6,7 +6,7 @@ function NotFoundPage() {
     <MainLayout>
       <div className="flex items-center justify-center">
         <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
-          <h2 className="text-4xl font-bold text-gray-800 mb-6">ERROR 404</h2>
+          <h2 className="text-4xl font-bold text-blue-800 mb-6">ERROR 404</h2>
           <p className="text-xl text-gray-600">
             The page you are looking for does not exist!
           </p>
