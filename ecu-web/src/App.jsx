@@ -9,6 +9,7 @@ import UserFormPage from "./pages/UserFormPage";
 import GeneralDocumentsPage from "./pages/GeneralDocumentsPage";
 import { nav } from "./components/navLinks";
 import NationalFederationsPage from "./pages/NationalFederationsPage";
+import UserManagementPage from "./pages/UserManagementPage";
 
 function generateRoutes(nav) {
   return nav.flatMap((section) =>
@@ -37,6 +38,9 @@ function App() {
             </Route>
             <Route element={<ProtectedRoute />}>
               <Route path="/create-user" element={<UserFormPage />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/user-management" element={<UserManagementPage />} />
             </Route>
             <Route element={<ProtectedRoute />}>
               <Route path="/upload-form" element={<FileFormPage />} />

@@ -3,7 +3,7 @@ const fetchUserData = async (req, res) => {
   const user = await db.User.findOne({
     where: { id: req.user.id },
     attributes: {
-      exclude: ["password"],
+      exclude: ["password", "username"],
     },
   });
   res.send(user);
