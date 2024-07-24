@@ -5,22 +5,46 @@ const { createToken, verifyExpiration } = db.authToken;
 
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const {
+      name,
+      username,
+      email,
+      password,
+      role,
+      country,
+      federation,
+      website,
+    } = req.body;
     const image = req.file;
 
     // Validate required fields
-    if (!name || !email || !password || !role || !image) {
+    if (
+      !name ||
+      !email ||
+      !password ||
+      !role ||
+      !image ||
+      !username ||
+      !country ||
+      !federation ||
+      !website
+    ) {
       return res.status(400).send("All fields are required");
     }
 
     // Check if the email exists
     const userExists = await db.User.findOne({
-      where: { email },
+      where: {
+        [db.Sequelize.Op.or]: [
+          { username: req.body.username },
+          { email: req.body.email },
+        ],
+      },
     });
     if (userExists) {
       return res
         .status(400)
-        .send("Email is already associated with an account");
+        .send("Username or Email is already associated with an account");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -30,7 +54,11 @@ const registerUser = async (req, res) => {
 
     await db.User.create({
       name,
+      username,
       role,
+      country,
+      federation,
+      website,
       email,
       password: hashedPassword,
       image: imageBuffer, // Store image as Buffer (BLOB)
@@ -45,19 +73,21 @@ const registerUser = async (req, res) => {
 
 const signInUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
     const user = await db.User.findOne({
-      where: { email },
+      where: { username },
     });
 
     if (!user) {
-      return res.status(404).json("Email not found");
+      return res.status(404).json("User not found");
     }
 
     // Verify password
     const passwordValid = await bcrypt.compare(password, user.password);
     if (!passwordValid) {
-      return res.status(401).json("Incorrect email and password combination");
+      return res
+        .status(401)
+        .json("Incorrect username and password combination");
     }
 
     let imageBase64 = null;
@@ -81,6 +111,9 @@ const signInUser = async (req, res) => {
     res.status(200).send({
       id: user.id,
       name: user.name,
+      username: user.username,
+      country: user.country,
+      federation: user.federation,
       role: user.role,
       email: user.email,
       image: imageBase64,

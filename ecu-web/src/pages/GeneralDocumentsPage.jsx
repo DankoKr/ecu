@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import MainLayout from "../layouts/MainLayout";
 import { getDocsBySector } from "../utils/requests/getDocsBySector.request";
 import NoDocumentsView from "../components/NoDocumentsView";
 import DocumentList from "../components/DocumentList";
 
-function CongressDocumentsPage() {
+function GeneralDocumentsPage({ pageTitle }) {
   const [docs, setDocs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,7 +13,7 @@ function CongressDocumentsPage() {
   useEffect(() => {
     const fetchDocs = async () => {
       try {
-        const docsData = await getDocsBySector("Congress Documents");
+        const docsData = await getDocsBySector(pageTitle);
         setDocs(docsData);
         setLoading(false);
       } catch (err) {
@@ -22,7 +23,7 @@ function CongressDocumentsPage() {
     };
 
     fetchDocs();
-  }, []);
+  }, [pageTitle]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -36,10 +37,14 @@ function CongressDocumentsPage() {
   return (
     <MainLayout>
       <div className="max-w-[800px] mx-auto p-5 bg-[#f8f9fa] rounded-md shadow-md">
-        <DocumentList title={"Congress Documents"} initialDocs={docs} />
+        <DocumentList title={pageTitle} initialDocs={docs} />
       </div>
     </MainLayout>
   );
 }
 
-export default CongressDocumentsPage;
+export default GeneralDocumentsPage;
+
+GeneralDocumentsPage.propTypes = {
+  pageTitle: PropTypes.string.isRequired,
+};
