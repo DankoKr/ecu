@@ -54,8 +54,9 @@ function UserFormPage() {
     try {
       await postData("/sign-up", formData);
       setSuccessMessage("Member Registered successfully");
+      setError(null);
     } catch (error) {
-      setError("Email already used");
+      setError("Email or Username already used");
     }
   };
 
@@ -193,7 +194,6 @@ function UserFormPage() {
                 name="website"
                 value={newUser.website}
                 onChange={handleChange}
-                required
                 className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
               />
             </div>

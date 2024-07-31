@@ -40,6 +40,7 @@ const getFilesBySector = async (req, res) => {
     const files = await db.File.findAll({
       where: { sector: sectorName },
       attributes: ["id", "name", "mimeType"],
+      order: [["id", "DESC"]],
     });
 
     res.json(files);

@@ -1,10 +1,10 @@
 export const nav = [
   {
-    name: "Documents & Minutes",
+    name: "Minutes",
     isVisible: true,
     subPages: [
-      { path: "/annual-general-meetings", name: "Annual General Meetings" },
-      { path: "/dm-congresses", name: "D&M Congresses" },
+      { path: "/general-meetings", name: "General Meetings (M)" },
+      { path: "/dm-congresses", name: "Congresses (M)" },
       { path: "/executive-board", name: "Executive Board" },
       { path: "/ecl-steering-committee", name: "ECL Steering Committee" },
       {
@@ -23,8 +23,8 @@ export const nav = [
     name: "Events",
     isVisible: true,
     subPages: [
-      { path: "/general-meetings", name: "General Meetings" },
-      { path: "/events-congresses", name: "Events Congresses" },
+      { path: "/general-meetings", name: "General Meetings (E)" },
+      { path: "/events-congresses", name: "Congresses (E)" },
       { path: "/competitions", name: "Competitions" },
       { path: "/judges-education", name: "Judges Education" },
       { path: "/coaches-education", name: "Coaches Education" },

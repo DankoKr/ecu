@@ -26,8 +26,7 @@ const registerUser = async (req, res) => {
       !image ||
       !username ||
       !country ||
-      !federation ||
-      !website
+      !federation
     ) {
       return res.status(400).send("All fields are required");
     }

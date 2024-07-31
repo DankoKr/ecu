@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       website: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       federation: {
         type: DataTypes.STRING,
