@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthProvider from "./utils/auth/AuthProvider";
 import HomePage from "./pages/HomePage";
@@ -15,18 +16,19 @@ function generateRoutes(nav) {
   return nav.flatMap((section) =>
     section.subPages
       ? section.subPages.map((subPage) => (
-          <Route key={subPage.path} element={<ProtectedRoute />}>
-            <Route
-              path={subPage.path}
-              element={<GeneralDocumentsPage pageTitle={subPage.name} />}
-            />
-          </Route>
+          <Route
+            key={subPage.path}
+            path={subPage.path}
+            element={<GeneralDocumentsPage pageTitle={subPage.name} />}
+          />
         ))
       : []
   );
 }
 
 function App() {
+  const routes = useMemo(() => generateRoutes(nav), [nav]);
+
   return (
     <div className="App">
       <Router>
@@ -35,23 +37,15 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/" element={<HomePage />} />
-            </Route>
-            <Route element={<ProtectedRoute />}>
               <Route path="/create-user" element={<UserFormPage />} />
-            </Route>
-            <Route element={<ProtectedRoute />}>
               <Route path="/user-management" element={<UserManagementPage />} />
-            </Route>
-            <Route element={<ProtectedRoute />}>
               <Route path="/upload-form" element={<FileFormPage />} />
-            </Route>
-            <Route element={<ProtectedRoute />}>
               <Route
                 path="/national-federations"
                 element={<NationalFederationsPage />}
               />
+              {routes}
             </Route>
-            {generateRoutes(nav)}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </AuthProvider>

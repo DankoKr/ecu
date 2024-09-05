@@ -19,7 +19,6 @@ const registerUser = async (req, res) => {
 
     // Validate required fields
     if (
-      !name ||
       !email ||
       !password ||
       !role ||
@@ -66,7 +65,7 @@ const registerUser = async (req, res) => {
     return res.status(201).send("Registration successful");
   } catch (err) {
     console.error(err);
-    return res.status(500).send("Error in registering user");
+    return res.status(500).send(err.message);
   }
 };
 
@@ -121,7 +120,7 @@ const signInUser = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).send("Sign in error");
+    return res.status(500).send(err.message);
   }
 };
 

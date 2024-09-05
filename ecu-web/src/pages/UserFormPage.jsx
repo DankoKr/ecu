@@ -76,7 +76,7 @@ function UserFormPage() {
                 className="block text-gray-700 font-bold mb-2"
                 htmlFor="username"
               >
-                Username
+                *Username
               </label>
               <input
                 type="text"
@@ -99,7 +99,6 @@ function UserFormPage() {
                 name="name"
                 value={newUser.name}
                 onChange={handleChange}
-                required
                 className="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
               />
             </div>
@@ -108,7 +107,7 @@ function UserFormPage() {
                 className="block text-gray-700 font-bold mb-2"
                 htmlFor="email"
               >
-                Email
+                *Email
               </label>
               <input
                 type="email"
@@ -124,7 +123,7 @@ function UserFormPage() {
                 className="block text-gray-700 font-bold mb-2"
                 htmlFor="password"
               >
-                Password
+                *Password
               </label>
               <input
                 type="password"
@@ -140,7 +139,7 @@ function UserFormPage() {
                 className="block text-gray-700 font-bold mb-2"
                 htmlFor="image"
               >
-                Profile Image
+                *Profile Image
               </label>
               <input
                 type="file"
@@ -155,7 +154,7 @@ function UserFormPage() {
                 className="block text-gray-700 font-bold mb-2"
                 htmlFor="country"
               >
-                Country
+                *Country
               </label>
               <input
                 type="text"
@@ -171,7 +170,7 @@ function UserFormPage() {
                 className="block text-gray-700 font-bold mb-2"
                 htmlFor="federationname"
               >
-                Federation Name
+                *Federation Name
               </label>
               <input
                 type="text"
