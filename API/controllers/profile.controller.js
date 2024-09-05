@@ -15,6 +15,10 @@ const getAllUsers = async (req, res) => {
       attributes: {
         exclude: ["password", "image", "role", "username"], // Exclude sensitive fields
       },
+      where: {
+        role: { [db.Sequelize.Op.ne]: "ADMIN" }, // Exclude users with userRole = ADMIN
+      },
+      order: [["country", "ASC"]],
     });
     res.send(users);
   } catch (error) {

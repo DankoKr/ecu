@@ -1,10 +1,17 @@
+import { useContext } from "react";
 import MainLayout from "../layouts/MainLayout";
 import AdminPage from "./AdminPage";
+import AuthContext from "../utils/auth/AuthContext";
 
 function HomePage() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user")); // Used beacause image doesn't load
+  const { logout } = useContext(AuthContext);
 
   if (user.role === "ADMIN") return <AdminPage />;
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <MainLayout>
@@ -25,6 +32,14 @@ function HomePage() {
             and materials from European Cheer Union structures.
           </p>
           <p className="text-lg text-gray-700">- ECU Executive Board -</p>
+        </div>
+        <div className="flex justify-center mt-16">
+          <button
+            onClick={handleLogout}
+            className="flex items-center justify-center w-48 h-12 bg-red-600 text-white text-lg font-bold rounded-lg transition-transform transform hover:bg-red-800 hover:scale-105"
+          >
+            Logout
+          </button>
         </div>
       </div>
     </MainLayout>

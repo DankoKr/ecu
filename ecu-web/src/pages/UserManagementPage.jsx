@@ -2,11 +2,13 @@ import { useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { deleteData } from "../utils/requests/deleteData.request";
 import { getUserByFederation } from "../utils/requests/getUserByFederation.request";
+import ConfirmationDialog from "../components/ConfirmationDialog";
 
 function UserManagementPage() {
   const [federation, setFederation] = useState("");
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -20,11 +22,16 @@ function UserManagementPage() {
     }
   };
 
+  const openConfirmationDialog = () => {
+    setIsDialogOpen(true);
+  };
+
   const handleDelete = async () => {
     if (!user) return;
 
     try {
       await deleteData(user.id, "/users");
+      setIsDialogOpen(false);
       setUser(null); // Clear user details after deletion
       setFederation("");
       setError("");
@@ -52,7 +59,7 @@ function UserManagementPage() {
             />
             <button
               type="submit"
-              className="ml-4 bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+              className="ml-4 bg-blue-500 hover:bg-blue-800 text-white px-4 py-2 rounded-md"
             >
               Search
             </button>
@@ -86,7 +93,7 @@ function UserManagementPage() {
             </p>
 
             <button
-              onClick={handleDelete}
+              onClick={openConfirmationDialog}
               className="mt-4 bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md"
             >
               Delete User
@@ -94,6 +101,12 @@ function UserManagementPage() {
           </div>
         )}
       </div>
+      <ConfirmationDialog
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        onConfirm={handleDelete}
+        message="Are you sure you want to delete this member?"
+      />
     </MainLayout>
   );
 }

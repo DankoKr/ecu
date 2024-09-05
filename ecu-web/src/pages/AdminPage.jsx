@@ -5,9 +5,13 @@ import AuthContext from "../utils/auth/AuthContext";
 import AccessDeniedPage from "./AccessDeniedPage";
 
 function AdminPage() {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   if (user.role !== "ADMIN") return <AccessDeniedPage />;
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <MainLayout>
@@ -31,6 +35,14 @@ function AdminPage() {
         >
           Add Member
         </Link>
+      </div>
+      <div className="flex justify-center mt-16">
+        <button
+          onClick={handleLogout}
+          className="flex items-center justify-center w-48 h-12 bg-red-600 text-white text-lg font-bold rounded-lg transition-transform transform hover:bg-red-800 hover:scale-105"
+        >
+          Logout
+        </button>
       </div>
     </MainLayout>
   );

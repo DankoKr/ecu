@@ -23,7 +23,7 @@ function GeneralDocumentsPage({ pageTitle }) {
     };
 
     fetchDocs();
-  }, [pageTitle]);
+  }, [pageTitle, docs]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

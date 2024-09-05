@@ -9,7 +9,7 @@ export const postData = async (url, formData) => {
     });
     return response.data;
   } catch (error) {
-    console.error("File upload error:", error);
+    console.error("Data upload error:", error);
     throw error;
   }
 };

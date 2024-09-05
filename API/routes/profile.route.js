@@ -14,7 +14,7 @@ const router = express.Router();
 router.get("/profile", verifyToken, getUserData);
 
 // Route to fetch all users
-router.get("/users", verifyToken, adminAuth, getAllUsers);
+router.get("/users", verifyToken, getAllUsers);
 
 // Route to fetch user by federation
 router.get(

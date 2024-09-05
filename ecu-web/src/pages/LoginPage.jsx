@@ -61,9 +61,9 @@ function LoginPage() {
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email"
+                id="username"
                 type="text"
-                placeholder="Email"
+                placeholder="Username"
                 value={username}
                 onChange={handleEmailChange}
               />

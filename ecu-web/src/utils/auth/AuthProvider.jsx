@@ -15,7 +15,6 @@ export default function AuthProvider({ children }) {
 
   const login = async (credentials) => {
     const response = await signInUser(credentials);
-    console.log(response);
     setUser({
       id: response.id,
       name: response.name,
@@ -30,6 +29,7 @@ export default function AuthProvider({ children }) {
   const logout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
     setIsAuthenticated(false);
     navigate("/login");
   };
