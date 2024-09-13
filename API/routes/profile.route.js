@@ -4,6 +4,7 @@ const {
   getAllUsers,
   getUserByFederation,
   deleteUserById,
+  updateUserById,
 } = require("../controllers/profile.controller");
 const { verifyToken } = require("../middlewares/auth.middleware");
 const { adminAuth } = require("../middlewares/adminAuth.middleware");
@@ -26,5 +27,8 @@ router.get(
 
 // Route to delete user by id
 router.delete("/users/:id", verifyToken, adminAuth, deleteUserById);
+
+// Route to update user by id
+router.put("/users/:id", verifyToken, adminAuth, updateUserById);
 
 module.exports = router;
