@@ -3,8 +3,10 @@ import MainLayout from "../layouts/MainLayout";
 import { deleteData } from "../utils/requests/deleteData.request";
 import { getUserByFederation } from "../utils/requests/getUserByFederation.request";
 import ConfirmationDialog from "../components/ConfirmationDialog";
+import { useNavigate } from "react-router-dom";
 
 function UserManagementPage() {
+  const navigate = useNavigate();
   const [federation, setFederation] = useState("");
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
@@ -26,13 +28,17 @@ function UserManagementPage() {
     setIsDialogOpen(true);
   };
 
+  const goToUserUpdatePage = () => {
+    navigate(`/update-user/${federation}`);
+  };
+
   const handleDelete = async () => {
     if (!user) return;
 
     try {
       await deleteData(user.id, "/users");
       setIsDialogOpen(false);
-      setUser(null); // Clear user details after deletion
+      setUser(null);
       setFederation("");
       setError("");
     } catch (err) {
@@ -97,6 +103,12 @@ function UserManagementPage() {
               className="mt-4 bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md"
             >
               Delete User
+            </button>
+            <button
+              onClick={goToUserUpdatePage}
+              className="mt-4 ml-2 bg-blue-500 hover:bg-blue-800 text-white px-4 py-2 rounded-md"
+            >
+              Update User
             </button>
           </div>
         )}
