@@ -18,7 +18,7 @@
 
 ## Available Scripts
 
-- npm install - Installs all required modules/dependencies
+- npm install - Installs all required modules/dependencies (run this command in both the API and the ecu-web directory)
 - npx sequelize-cli db:migrate - To run all the available db migrations (must be in the API directory)
 - node index.js - Starts the Express server (must be in the API directory)
 - npm run dev - Starts the development server for the React web app
